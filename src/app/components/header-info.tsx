@@ -55,11 +55,11 @@ const HeaderInfo = React.memo(({ data, rate }: Props) => {
         {maxWan && ` / 最高 ${maxWan}万`}
         {drawdown != null && parseFloat(drawdown) !== 0 && (
           <b>
-            {"("}-{drawdown}
-            {")"}
+            {" ("}-{drawdown}
+            {") "}
           </b>
         )}
-        /年化
+        / 年化
         <b>{annualized}</b>
       </p>
     </div>
