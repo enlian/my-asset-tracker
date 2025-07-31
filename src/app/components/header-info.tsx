@@ -53,7 +53,7 @@ const HeaderInfo = React.memo(({ data, rate }: Props) => {
         {latestFormattedDate} {latestWan && <b>{latestWan}万</b>}{" "}
         {latestUsdWan && ` / ${latestUsdWan}万 (美元${rate.usd})`}{" "}
         {maxWan && ` / 最高 ${maxWan}万(`}
-        {drawdown != null && <b>-{drawdown}</b>}
+        {drawdown != null && parseFloat(drawdown) !== 0 && <b>-{drawdown}</b>}
         {maxWan && ") "}/ 年化 <b>{annualized}</b>
       </p>
     </div>
