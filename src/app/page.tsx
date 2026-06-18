@@ -31,46 +31,59 @@ const Page = () => {
     enabled: isAuthenticated,
   });
 
-  if (status === "loading") {
+  if (status === "loading" || isLoading) {
     return <Spinner />;
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="flex flex-col gap-4 p-6 dark:bg-gray-900 dark:text-white min-h-screen">
-        <div className="flex justify-end gap-3">
-          <LoginModal />
-        </div>
-        <div className="flex-1 flex items-center justify-center text-white text-lg">
-          请先登录以查看资产数据。
+      <div className="flex min-h-screen flex-col justify-center px-4 py-8 text-center sm:px-6">
+        <div className="mx-auto w-full max-w-md rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl shadow-slate-950/40">
+          <h1 className="text-2xl font-semibold text-white">资产管家</h1>
+          <p className="mt-3 text-slate-400">
+            请先登录以查看您的资产趋势和分析结果。
+          </p>
+          <div className="mt-6">
+            <LoginModal />
+          </div>
         </div>
       </div>
     );
-  }
-
-  if (isLoading) {
-    return <Spinner />;
   }
 
   if (error || !data?.assets?.length) {
     return (
-      <Error
-        errorMessage={error?.message || "暂无数据，请重试"}
-        fetchData={refetch}
-      />
+      <div className="min-h-screen px-4 py-8 sm:px-6">
+        <Error
+          errorMessage={error?.message || "暂无数据，请重试"}
+          fetchData={refetch}
+        />
+      </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4 p-6 dark:bg-gray-900 dark:text-white min-h-screen">
-      <div className="flex justify-end gap-3">
-        <AddAmountModal onSuccess={refetch} rate={data.exchangeRate} />
-        <LoginModal />
-      </div>
+    <main className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 px-0 py-4 sm:px-2 md:px-0">
+      <header className="flex flex-wrap items-center justify-between gap-3 rounded-[2rem] border border-slate-800 bg-slate-900/95 p-4 shadow-xl shadow-slate-950/30">
+        <div>
+          <p className="text-sm uppercase tracking-[0.3em] text-cyan-300/80">
+            资产管家
+          </p>
+          <h1 className="mt-2 text-2xl font-semibold text-white">
+            移动优先资产追踪
+          </h1>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <AddAmountModal onSuccess={refetch} rate={data.exchangeRate} />
+          <LoginModal />
+        </div>
+      </header>
 
-      <HeaderInfo data={data} rate={data.exchangeRate} />
-      <Charts data={data} />
-    </div>
+      <section className="grid gap-4">
+        <HeaderInfo data={data} rate={data.exchangeRate} />
+        <Charts data={data} />
+      </section>
+    </main>
   );
 };
 

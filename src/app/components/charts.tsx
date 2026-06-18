@@ -73,14 +73,16 @@ export default function Charts({ data }: ChartProps) {
       labels,
       datasets: [
         {
-          label: "资产金额 (元)",
+          label: "资产金额",
           data: amounts,
-          borderColor: transparentize(CHART_COLORS.blue, 0),
-          backgroundColor: transparentize(CHART_COLORS.blue, 0.3),
+          borderColor: CHART_COLORS.blue,
+          backgroundColor: transparentize(CHART_COLORS.blue, 0.16),
           fill: true,
           spanGaps: true,
           cubicInterpolationMode: "monotone",
-          tension: 1,
+          tension: 0.4,
+          pointRadius: 0,
+          pointHoverRadius: 6,
         },
       ],
     };
@@ -95,14 +97,11 @@ export default function Charts({ data }: ChartProps) {
         intersect: false,
       },
       plugins: {
-        title: {
-          display: true,
-          text: "总资产走势图",
-          color: "white",
-        },
         tooltip: {
           mode: "index",
           intersect: false,
+          backgroundColor: "rgba(15, 23, 42, 0.95)",
+          padding: 12,
           callbacks: {
             label: (tooltipItem: TooltipItem<"line">) => {
               const value = tooltipItem.raw as number;
@@ -111,9 +110,7 @@ export default function Charts({ data }: ChartProps) {
           },
         },
         legend: {
-          labels: {
-            color: "white",
-          },
+          display: false,
         },
         zoom: {
           pan: {
@@ -136,26 +133,28 @@ export default function Charts({ data }: ChartProps) {
           time: {
             unit: "month",
             displayFormats: {
-              month: "YY/M/D",
+              month: "MM/DD",
             },
             tooltipFormat: "YYYY/MM/DD",
           },
           ticks: {
-            maxTicksLimit: 30,
-            color: "white",
+            color: "rgba(203, 213, 225, 0.9)",
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 8,
           },
           grid: {
-            color: "rgba(255, 255, 255, 0.1)",
+            color: "rgba(148, 163, 184, 0.1)",
           },
         },
         y: {
           ticks: {
             callback: (value: string | number) =>
               typeof value === "number" ? `${value / 10000}万` : value,
-            color: "white",
+            color: "rgba(203, 213, 225, 0.9)",
           },
           grid: {
-            color: "rgba(255, 255, 255, 0.1)",
+            color: "rgba(148, 163, 184, 0.08)",
           },
         },
       },
@@ -194,28 +193,44 @@ export default function Charts({ data }: ChartProps) {
   const isEmpty = sortedAssets.length === 0;
 
   return (
-    <div className="h-[600px] mb-5 relative">
-      <div className="flex flex-wrap justify-end gap-2 sm:absolute sm:right-0 sm:top-5">
-        {ZOOM_OPTIONS.map(({ label, key }) => (
-          <Button
-            key={key}
-            onClick={() => handleZoomClick(key)}
-            variant={activeZoom === key ? "secondary" : "default"}
-          >
-            {label}
-          </Button>
-        ))}
+    <section className="card overflow-hidden p-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/70">
+            资产趋势
+          </p>
+          <h2 className="mt-2 text-xl font-semibold text-white">
+            总资产走势图
+          </h2>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {ZOOM_OPTIONS.map(({ label, key }) => (
+            <Button
+              key={key}
+              size="sm"
+              variant={activeZoom === key ? "secondary" : "outline"}
+              onClick={() => handleZoomClick(key)}
+              className="min-w-[68px]"
+            >
+              {label}
+            </Button>
+          ))}
+        </div>
       </div>
 
-      {isEmpty ? (
-        <Skeleton className="h-full min-h-[300px]" />
-      ) : (
-        <Line
-          ref={lineChartRef}
-          data={chartData}
-          options={assetsChartOptions}
-        />
-      )}
-    </div>
+      <div className="mt-4 min-h-[300px] rounded-[2rem] bg-slate-950/70 p-3">
+        {isEmpty ? (
+          <Skeleton className="h-full min-h-[280px] rounded-[1.5rem]" />
+        ) : (
+          <div className="h-[320px] sm:h-[380px]">
+            <Line
+              ref={lineChartRef}
+              data={chartData}
+              options={assetsChartOptions}
+            />
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

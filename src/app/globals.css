@@ -3,80 +3,64 @@
 @tailwind utilities;
 
 @layer base {
-  /* Default Styles (Dark Mode) */
   :root {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
-    --popover: 224 71% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
-    --border: 216 34% 17%;
-    --input: 216 34% 17%; /* Defining input color if you want */
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
-    --accent: 216 34% 17%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --ring: 216 34% 17%;
-    --radius: 0.5rem;
+    --background: 222 18% 8%;
+    --foreground: 210 25% 95%;
+    --muted: 220 20% 12%;
+    --muted-foreground: 210 14% 70%;
+    --popover: 222 18% 12%;
+    --popover-foreground: 210 20% 92%;
+    --border: 220 25% 18%;
+    --input: 220 18% 14%;
+    --card: 225 19% 10%;
+    --card-foreground: 210 28% 96%;
+    --primary: 187 96% 52%;
+    --primary-foreground: 210 15% 12%;
+    --secondary: 198 100% 29%;
+    --secondary-foreground: 210 15% 12%;
+    --accent: 207 100% 51%;
+    --accent-foreground: 214 20% 8%;
+    --destructive: 0 78% 58%;
+    --destructive-foreground: 210 10% 98%;
+    --ring: 200 100% 50%;
+    --radius: 1rem;
   }
 
-  /* Light Mode (If light theme is applied) */
-  .light {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%; /* Light input color */
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 40% 98%;
-    --ring: 215 20.2% 65.1%;
-  }
-
-  /* Global Styles */
-  * {
-    @apply border-border;
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    min-height: 100vh;
+    @apply bg-slate-950 text-slate-100 antialiased;
   }
 
-  button {
-    @apply text-white bg-primary border-primary;
+  * {
+    box-sizing: border-box;
   }
 
-  /* Specific element styling */
+  button,
+  input,
+  textarea,
+  select {
+    @apply outline-none;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply bg-slate-900 text-slate-100 border border-slate-800 rounded-2xl px-4 py-3 transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20;
+  }
+
   .card {
-    @apply bg-card text-card-foreground rounded-lg p-4 shadow-md;
+    @apply bg-slate-900 border border-slate-800 text-slate-100 rounded-3xl shadow-2xl shadow-slate-950/20;
   }
 
-  .input {
-    @apply bg-gray-800 text-white border-muted rounded-md p-2; /* Fixed background for inputs */
+  .primary-button {
+    @apply bg-cyan-500 text-slate-950 hover:bg-cyan-400;
   }
 
-  .popover {
-    @apply bg-popover text-popover-foreground rounded-lg p-4 shadow-md;
-  }
-
-  .bordered {
-    @apply border-2 border-border;
+  .secondary-button {
+    @apply bg-slate-800 text-slate-100 border border-slate-700 hover:bg-slate-700;
   }
 }

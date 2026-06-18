@@ -4,8 +4,8 @@ import { QueryProvider } from "./providers/QueryProvider";
 import SessionProvider from "./providers/SessionProvider";
 
 export const metadata = {
-  title: "资产统计",
-  description: "资产统计，并与当下热门资产做对比",
+  title: "资产管家",
+  description: "移动优先资产追踪与可视化分析",
 };
 
 export default function RootLayout({
@@ -14,9 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-gray-900 text-white">
-        <div className="md:w-[1024px] mx-auto h-screen">
+    <html lang="zh-CN" className="dark">
+      <body className="min-h-screen bg-slate-950 text-slate-100">
+        <div className="mx-auto min-h-screen w-full max-w-5xl px-4 py-4 md:px-6 md:py-6">
           <QueryProvider>
             <SessionProvider>{children}</SessionProvider>
           </QueryProvider>

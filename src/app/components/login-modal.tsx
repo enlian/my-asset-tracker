@@ -19,7 +19,6 @@ const LoginModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
 
-  // 处理登录
   const loginMutation = useMutation({
     mutationFn: async () => {
       const result = await signIn("credentials", {
@@ -34,11 +33,10 @@ const LoginModal = () => {
       toast.success("登录成功");
     },
     onError: (error: any) => {
-      toast.error(error.message || "发生未知错误，请稍后重试");
+      toast.error(error.message || "登录失败，请重试");
     },
   });
 
-  // 处理登出
   const handleLogout = async () => {
     await signOut();
     toast.success("已退出登录");
@@ -49,68 +47,58 @@ const LoginModal = () => {
       {!session ? (
         <Button onClick={() => setIsOpen(true)}>登录</Button>
       ) : (
-        <div className="flex gap-3">
-          {/* {pathname !== "/history" && (
-            <Button onClick={() => router.push("/history")}>历史</Button>
-          )} */}
-          <Button className="bg-gray-700" onClick={handleLogout}>
-            退出
-          </Button>
-        </div>
+        <Button variant="secondary" onClick={handleLogout}>
+          退出
+        </Button>
       )}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="w-[300px] bg-gray-800 text-white">
+        <DialogContent className="w-full max-w-sm rounded-[2rem] bg-slate-950 p-6 border border-slate-800">
           <DialogHeader>
-            <DialogTitle>登录</DialogTitle>
+            <DialogTitle className="text-xl font-semibold text-white">
+              登录
+            </DialogTitle>
           </DialogHeader>
+
           <form
             onSubmit={(e) => {
               e.preventDefault();
               loginMutation.mutate();
             }}
-            className="space-y-4 mt-3"
+            className="mt-6 space-y-4"
           >
-            <div>
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium mb-2 text-white"
-              >
-                用户名
-              </label>
+            <label className="block text-sm font-medium text-slate-300">
+              用户名
               <input
-                type="text"
-                id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="w-full px-3 py-2 border rounded-md bg-gray-700 text-white"
+                className="mt-2 w-full rounded-3xl border border-slate-800 bg-slate-950 px-4 py-3 text-white"
+                placeholder="请输入用户名"
               />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium mb-2 text-white"
-              >
-                密码
-              </label>
+            </label>
+
+            <label className="block text-sm font-medium text-slate-300">
+              密码
               <input
                 type="password"
-                id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-3 py-2 border rounded-md bg-gray-700 text-white"
+                className="mt-2 w-full rounded-3xl border border-slate-800 bg-slate-950 px-4 py-3 text-white"
+                placeholder="请输入密码"
               />
-            </div>
+            </label>
+
             {loginMutation.isError && (
-              <p className="text-red-500 text-sm">
+              <p className="text-sm text-red-400">
                 {loginMutation.error?.message}
               </p>
             )}
+
             <DialogFooter>
               <Button
-                className="w-full p-5 mt-3"
+                className="w-full"
                 type="submit"
                 disabled={loginMutation.isPending}
               >
