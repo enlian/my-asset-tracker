@@ -193,13 +193,13 @@ export default function Charts({ data }: ChartProps) {
   const isEmpty = sortedAssets.length === 0;
 
   return (
-    <section className="card overflow-hidden p-4">
+    <section className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm shadow-slate-400/10">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/70">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
             资产趋势
           </p>
-          <h2 className="mt-2 text-xl font-semibold text-white">
+          <h2 className="mt-2 text-xl font-semibold text-slate-950">
             总资产走势图
           </h2>
         </div>
@@ -218,7 +218,7 @@ export default function Charts({ data }: ChartProps) {
         </div>
       </div>
 
-      <div className="mt-4 min-h-[300px] rounded-[2rem] bg-slate-950/70 p-3">
+      <div className="mt-4 min-h-[300px] rounded-[2rem] bg-slate-50 p-3">
         {isEmpty ? (
           <Skeleton className="h-full min-h-[280px] rounded-[1.5rem]" />
         ) : (

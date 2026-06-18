@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 222 18% 8%;
-    --foreground: 210 25% 95%;
-    --muted: 220 20% 12%;
-    --muted-foreground: 210 14% 70%;
-    --popover: 222 18% 12%;
-    --popover-foreground: 210 20% 92%;
-    --border: 220 25% 18%;
-    --input: 220 18% 14%;
-    --card: 225 19% 10%;
-    --card-foreground: 210 28% 96%;
-    --primary: 187 96% 52%;
-    --primary-foreground: 210 15% 12%;
-    --secondary: 198 100% 29%;
-    --secondary-foreground: 210 15% 12%;
-    --accent: 207 100% 51%;
-    --accent-foreground: 214 20% 8%;
-    --destructive: 0 78% 58%;
-    --destructive-foreground: 210 10% 98%;
-    --ring: 200 100% 50%;
+    --background: 212 73% 97%;
+    --foreground: 213 20% 15%;
+    --muted: 210 16% 72%;
+    --muted-foreground: 210 14% 50%;
+    --popover: 210 55% 98%;
+    --popover-foreground: 213 18% 15%;
+    --border: 210 20% 90%;
+    --input: 210 35% 96%;
+    --card: 210 100% 100%;
+    --card-foreground: 213 18% 14%;
+    --primary: 192 100% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 80% 55%;
+    --secondary-foreground: 213 18% 15%;
+    --accent: 183 80% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 355 84% 63%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 200 90% 65%;
     --radius: 1rem;
   }
 
@@ -32,7 +32,7 @@
 
   body {
     min-height: 100vh;
-    @apply bg-slate-950 text-slate-100 antialiased;
+    @apply bg-slate-50 text-slate-900 antialiased;
   }
 
   * {
@@ -49,18 +49,18 @@
   input,
   select,
   textarea {
-    @apply bg-slate-900 text-slate-100 border border-slate-800 rounded-2xl px-4 py-3 transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20;
+    @apply bg-slate-50 text-slate-950 border border-slate-200 rounded-2xl px-4 py-3 transition focus:border-slate-400 focus:ring-2 focus:ring-slate-300/50;
   }
 
   .card {
-    @apply bg-slate-900 border border-slate-800 text-slate-100 rounded-3xl shadow-2xl shadow-slate-950/20;
+    @apply bg-white border border-slate-200 text-slate-950 rounded-3xl shadow-sm shadow-slate-400/10;
   }
 
   .primary-button {
-    @apply bg-cyan-500 text-slate-950 hover:bg-cyan-400;
+    @apply bg-slate-900 text-white hover:bg-slate-800;
   }
 
   .secondary-button {
-    @apply bg-slate-800 text-slate-100 border border-slate-700 hover:bg-slate-700;
+    @apply bg-slate-100 text-slate-900 border border-slate-200 hover:bg-slate-200;
   }
 }

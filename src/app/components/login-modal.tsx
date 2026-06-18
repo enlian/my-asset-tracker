@@ -53,9 +53,9 @@ const LoginModal = () => {
       )}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="w-full max-w-sm rounded-[2rem] bg-slate-950 p-6 border border-slate-800">
+        <DialogContent className="w-full max-w-sm rounded-[2rem] bg-white p-6 border border-slate-200">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold text-white">
+            <DialogTitle className="text-xl font-semibold text-slate-950">
               登录
             </DialogTitle>
           </DialogHeader>
@@ -67,31 +67,31 @@ const LoginModal = () => {
             }}
             className="mt-6 space-y-4"
           >
-            <label className="block text-sm font-medium text-slate-300">
+            <label className="block text-sm font-medium text-slate-700">
               用户名
               <input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="mt-2 w-full rounded-3xl border border-slate-800 bg-slate-950 px-4 py-3 text-white"
+                className="mt-2 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950"
                 placeholder="请输入用户名"
               />
             </label>
 
-            <label className="block text-sm font-medium text-slate-300">
+            <label className="block text-sm font-medium text-slate-700">
               密码
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="mt-2 w-full rounded-3xl border border-slate-800 bg-slate-950 px-4 py-3 text-white"
+                className="mt-2 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950"
                 placeholder="请输入密码"
               />
             </label>
 
             {loginMutation.isError && (
-              <p className="text-sm text-red-400">
+              <p className="text-sm text-red-500">
                 {loginMutation.error?.message}
               </p>
             )}

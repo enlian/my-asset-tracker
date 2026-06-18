@@ -14,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN" className="dark">
-      <body className="min-h-screen bg-slate-950 text-slate-100">
+    <html lang="zh-CN">
+      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
         <div className="mx-auto min-h-screen w-full max-w-5xl px-4 py-4 md:px-6 md:py-6">
           <QueryProvider>
             <SessionProvider>{children}</SessionProvider>

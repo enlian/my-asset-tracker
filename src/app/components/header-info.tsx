@@ -36,47 +36,49 @@ const HeaderInfo = React.memo(({ data, rate }: Props) => {
 
   return (
     <section className="grid gap-4">
-      <div className="card p-5">
-        <div className="flex flex-col gap-4 rounded-[2rem] bg-slate-950/90 p-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-400/10">
+        <div className="flex flex-col gap-4 rounded-[2rem] bg-slate-50 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/70">最新更新</p>
-            <p className="mt-2 text-2xl font-semibold text-white">{stats.latestDate}</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">最新更新</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-950">{stats.latestDate}</p>
           </div>
-          <span className="inline-flex items-center rounded-full bg-cyan-500/20 px-4 py-2 text-xs font-medium text-cyan-200">
+          <span className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-xs font-medium text-slate-700">
             移动优先体验
           </span>
         </div>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-3xl bg-slate-900/90 p-4">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">当前资产</p>
-            <p className="mt-3 text-3xl font-semibold text-white">{latestWan}万</p>
-            <p className="mt-2 text-sm text-slate-400">美元约 {(stats.latestAmount / stats.usdRate / 10000).toFixed(2)}万</p>
+          <div className="rounded-3xl bg-slate-50 p-4 border border-slate-200">
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">当前资产</p>
+            <p className="mt-3 text-3xl font-semibold text-slate-950">{latestWan}万</p>
+            <p className="mt-2 text-sm text-slate-500">美元约 {(stats.latestAmount / stats.usdRate / 10000).toFixed(2)}万</p>
           </div>
-          <div className="rounded-3xl bg-slate-900/90 p-4">
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">历史高点</p>
-            <p className="mt-3 text-3xl font-semibold text-white">{maxWan}万</p>
-            <p className="mt-2 text-sm text-slate-400">回撤 {drawdownLabel}</p>
+          <div className="rounded-3xl bg-slate-50 p-4 border border-slate-200">
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-500">历史高点</p>
+            <p className="mt-3 text-3xl font-semibold text-slate-950">{maxWan}万</p>
+            <p className="mt-2 text-sm text-slate-500">回撤 {drawdownLabel}</p>
           </div>
         </div>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3">
-        <div className="card p-4">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">年化收益</p>
-          <p className="mt-3 text-2xl font-semibold text-white">{annualized}</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">年化收益</p>
+          <p className="mt-3 text-2xl font-semibold text-slate-950">{annualized}</p>
         </div>
-        <div className="card p-4">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">美元汇率</p>
-          <p className="mt-3 text-2xl font-semibold text-white">{stats.usdRate.toFixed(2)}</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">美元汇率</p>
+          <p className="mt-3 text-2xl font-semibold text-slate-950">{stats.usdRate.toFixed(2)}</p>
         </div>
-        <div className="card p-4">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">英镑汇率</p>
-          <p className="mt-3 text-2xl font-semibold text-white">{stats.gbpRate.toFixed(2)}</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">英镑汇率</p>
+          <p className="mt-3 text-2xl font-semibold text-slate-950">{stats.gbpRate.toFixed(2)}</p>
         </div>
       </div>
     </section>
   );
 });
+
+HeaderInfo.displayName = "HeaderInfo";
 
 export default HeaderInfo;

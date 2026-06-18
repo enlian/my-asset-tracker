@@ -131,9 +131,9 @@ const AddAmountModal = ({
       ) : null}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="w-full max-w-md rounded-[2rem] bg-slate-950 p-6 border border-slate-800">
+        <DialogContent className="w-full max-w-md rounded-[2rem] bg-white p-6 border border-slate-200">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold text-white">
+            <DialogTitle className="text-xl font-semibold text-slate-950">
               添加资产
             </DialogTitle>
           </DialogHeader>
@@ -142,7 +142,7 @@ const AddAmountModal = ({
             {rows.map((row, index) => (
               <div
                 key={index}
-                className="flex flex-wrap gap-3 rounded-3xl border border-slate-800 bg-slate-900 p-4"
+                className="flex flex-wrap gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4"
               >
                 <input
                   type="number"
@@ -151,7 +151,7 @@ const AddAmountModal = ({
                   onChange={(e) =>
                     updateRow(index, { amount: Number(e.target.value) })
                   }
-                  className="w-full flex-1 rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white"
+                  className="w-full flex-1 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950"
                   placeholder="金额"
                 />
                 <select
@@ -159,7 +159,7 @@ const AddAmountModal = ({
                   onChange={(e) =>
                     updateRow(index, { currency: e.target.value as Currency })
                   }
-                  className="w-24 rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white"
+                  className="w-24 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-950"
                 >
                   <option value="CNY">CNY</option>
                   <option value="USD">USD</option>
@@ -168,7 +168,7 @@ const AddAmountModal = ({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-11 w-11 rounded-full border border-slate-700 text-slate-300"
+                  className="h-11 w-11 rounded-full border border-slate-200 text-slate-600"
                   onClick={() => removeRow(index)}
                 >
                   ×
@@ -178,8 +178,8 @@ const AddAmountModal = ({
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm text-slate-400">合计(CNY)</p>
-                <p className="text-2xl font-semibold text-white">
+                <p className="text-sm text-slate-500">合计(CNY)</p>
+                <p className="text-2xl font-semibold text-slate-950">
                   ￥{totalInCNY.toFixed(0)}
                 </p>
               </div>
