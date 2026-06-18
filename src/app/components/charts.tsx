@@ -6,17 +6,12 @@ import { Chart as ChartJS, registerables, TooltipItem } from "chart.js";
 import "chartjs-adapter-moment";
 import zoomPlugin from "chartjs-plugin-zoom";
 import moment from "moment";
-import "moment/locale/zh-cn";
+// import "moment/locale/zh-cn";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import type { AllData, ChartData } from "../lib/types";
-import {
-  CHART_COLORS,
-  getAmounts,
-  getReturnrate,
-  transparentize,
-} from "../lib/utils";
+import { CHART_COLORS, getAmounts, transparentize } from "../lib/utils";
 
 moment.locale("zh-cn");
 ChartJS.register(...registerables, zoomPlugin);
@@ -38,12 +33,9 @@ type ZoomKey = (typeof ZOOM_OPTIONS)[number]["key"];
 
 export default function Charts({ data }: ChartProps) {
   const [assetsChartData, setAssetsChartData] = useState<ChartData | null>(
-    null
+    null,
   );
-  const [barChartData, setBarChartData] = useState<ChartData>({
-    labels: [],
-    datasets: [],
-  });
+
   const [assetsChartLoading, setAssetsChartLoading] = useState(false);
 
   const [activeZoom, setActiveZoom] = useState<ZoomKey>("1y");
@@ -59,54 +51,6 @@ export default function Charts({ data }: ChartProps) {
 
   useEffect(() => {
     if (!data) return;
-
-    setBarChartData({
-      labels: ["今年", "3年", "5年"],
-      datasets: [
-        {
-          label: "自有资产",
-          data: [
-            getReturnrate(data.assets, 1),
-            getReturnrate(data.assets, 3),
-            getReturnrate(data.assets, 5),
-          ],
-          borderColor: CHART_COLORS.blue,
-          backgroundColor: transparentize(CHART_COLORS.blue, 0.5),
-        },
-        {
-          label: "SPY",
-          data: [
-            getReturnrate(data.SPY, 1),
-            getReturnrate(data.SPY, 3),
-            getReturnrate(data.SPY, 5),
-          ],
-          borderColor: CHART_COLORS.grey,
-          backgroundColor: transparentize(CHART_COLORS.grey, 0.8),
-        },
-        {
-          label: "QQQ",
-          data: [
-            getReturnrate(data.QQQ, 1),
-            getReturnrate(data.QQQ, 3),
-            getReturnrate(data.QQQ, 5),
-          ],
-          borderColor: CHART_COLORS.green,
-          backgroundColor: transparentize(CHART_COLORS.green, 0.5),
-          hidden: true,
-        },
-        {
-          label: "BTC",
-          data: [
-            getReturnrate(data.btc, 1),
-            getReturnrate(data.btc, 3),
-            getReturnrate(data.btc, 5),
-          ],
-          borderColor: CHART_COLORS.yellow,
-          backgroundColor: transparentize(CHART_COLORS.yellow, 0.6),
-          hidden: true,
-        },
-      ],
-    });
   }, [data]);
 
   useEffect(() => {
@@ -188,7 +132,7 @@ export default function Charts({ data }: ChartProps) {
           label: function (tooltipItem: TooltipItem<"line">) {
             const value = tooltipItem.raw as number;
             return `${tooltipItem.dataset.label}: ${(value / 10000).toFixed(
-              2
+              2,
             )}万`;
           },
         },
@@ -244,59 +188,14 @@ export default function Charts({ data }: ChartProps) {
     },
   };
 
-  const barChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: "投资回报率对比",
-        color: "white",
-      },
-      tooltip: {
-        callbacks: {
-          label: function (tooltipItem: TooltipItem<"bar">) {
-            const value = tooltipItem.raw as number;
-            return `${tooltipItem.dataset.label}: ${value.toFixed(2)}%`;
-          },
-        },
-      },
-      legend: {
-        labels: {
-          color: "white",
-        },
-      },
-    },
-    scales: {
-      y: {
-        ticks: {
-          callback: (value: number | string) =>
-            typeof value === "number" ? `${value}%` : value,
-          color: "white", // y轴文字颜色
-        },
-        grid: {
-          color: "rgba(255, 255, 255, 0.1)", // y轴网格线颜色
-        },
-      },
-      x: {
-        title: {
-          display: true,
-          text: "时间范围",
-          color: "white", // x轴标题文字颜色
-        },
-        ticks: {
-          color: "white",
-        },
-        grid: {
-          color: "rgba(255, 255, 255, 0.1)", // x轴网格线颜色
-        },
-      },
-    },
-  };
-
   return (
     <>
       <div className="h-[350px] mb-5 relative">
+        {/* {assetsChartData && assetsChartData.datasets[0].data.length === 0 && (
+          <div className="flex items-center justify-center h-full text-gray-500">
+            暂无数据
+          </div>
+        )} */}
         <div className="flex flex-wrap justify-end gap-2 sm:absolute sm:right-0 sm:top-5">
           {ZOOM_OPTIONS.map(({ label, key }) => (
             <Button
@@ -319,10 +218,6 @@ export default function Charts({ data }: ChartProps) {
             />
           )
         )}
-      </div>
-
-      <div className="h-[350px]">
-        <Bar data={barChartData} options={barChartOptions} />
       </div>
     </>
   );

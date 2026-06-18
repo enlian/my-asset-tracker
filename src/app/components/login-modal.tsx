@@ -53,9 +53,9 @@ const LoginModal = () => {
         <Button onClick={() => setIsOpen(true)}>登录</Button>
       ) : (
         <div className="flex gap-3">
-          {pathname !== "/history" && (
+          {/* {pathname !== "/history" && (
             <Button onClick={() => router.push("/history")}>历史</Button>
-          )}
+          )} */}
           <Button className="bg-gray-700" onClick={handleLogout}>
             退出
           </Button>
