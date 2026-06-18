@@ -21,15 +21,34 @@ const fetchAssets = async () => {
 
 const Page = () => {
   const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated" && !!session;
 
   const { data, error, isLoading, refetch } = useQuery<AllData>({
     queryKey: ["assets", session?.user?.name],
     queryFn: fetchAssets,
     staleTime: 1000 * 60 * 5,
     retry: 2,
+    enabled: isAuthenticated,
   });
 
-  if (status === "loading" || isLoading) {
+  if (status === "loading") {
+    return <Spinner />;
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="flex flex-col gap-4 p-6 dark:bg-gray-900 dark:text-white min-h-screen">
+        <div className="flex justify-end gap-3">
+          <LoginModal />
+        </div>
+        <div className="flex-1 flex items-center justify-center text-white text-lg">
+          请先登录以查看资产数据。
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
     return <Spinner />;
   }
 
