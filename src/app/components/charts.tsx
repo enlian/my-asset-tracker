@@ -190,12 +190,7 @@ export default function Charts({ data }: ChartProps) {
 
   return (
     <>
-      <div className="h-[350px] mb-5 relative">
-        {/* {assetsChartData && assetsChartData.datasets[0].data.length === 0 && (
-          <div className="flex items-center justify-center h-full text-gray-500">
-            暂无数据
-          </div>
-        )} */}
+      <div className="h-[600px] mb-5 relative">
         <div className="flex flex-wrap justify-end gap-2 sm:absolute sm:right-0 sm:top-5">
           {ZOOM_OPTIONS.map(({ label, key }) => (
             <Button
